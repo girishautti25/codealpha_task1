@@ -1,0 +1,26 @@
+import random 
+words = ["python", "coding", "hangman", "computer", "program"]
+chosen_word = random.choice(words)
+display = ["_"] * len(chosen_word)
+
+print("Welcome to Hangman!")
+print("Word to guess:", " ".join(display))
+lives = 6  
+while lives > 0 and "_" in display:
+    guess = input("Guess a letter: ").lower()
+
+    if guess in chosen_word:
+        # Correct guess → reveal the letters
+        for index, letter in enumerate(chosen_word):
+            if letter == guess:
+                display[index] = guess
+        print("Good guess:", " ".join(display))
+    else:
+        # Wrong guess → lose a life
+        lives -= 1
+        print("Wrong guess! Lives left:", lives)
+        print("Word:", " ".join(display))
+        if "_" not in display:
+         print("🎉 Congratulations! You guessed the word:", chosen_word)
+else:
+    print("💀 Game Over! The word was:", chosen_word)
